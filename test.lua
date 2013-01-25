@@ -1,4 +1,4 @@
-co=coroutine.create(
+co1=coroutine.create(
 function()
 print("hello world")
 print(connect())
@@ -7,6 +7,7 @@ print(query_entrust())
 --print(query_orders())
 --print(query_capital())
 end)
+
 
 coroutine.resume(co)
 sleep(300000)

@@ -31,6 +31,7 @@ int	LuaClass::Init(string serverAddress, int cmdPort, int dataPort)
     luaL_openlibs(pMainShell);  
     luaopen_string(pMainShell);  
     luaopen_math(pMainShell); 
+	luaopen_pluto(pMainShell);
 	nSend=nRecv=nSucc=nFail=0;
 
 	hVirtualCloudClient=CreateVirtualCloudClient();
@@ -55,6 +56,7 @@ int	LuaClass::Init(string serverAddress, int cmdPort, int dataPort)
 	return 0;
 }
 
+
 int LuaClass::executeMain(string filename)
 {
 	int iError;
@@ -64,7 +66,7 @@ int LuaClass::executeMain(string filename)
 		cout << "Load test script FAILED!" << lua_tostring(pMainShell, -1)<< endl;  
 		lua_close(pMainShell);
 		return 0;
-	}
+	//}
 	iError = lua_pcall(pMainShell, 0, 0, 0);
 	if (iError)
 	{
@@ -73,6 +75,7 @@ int LuaClass::executeMain(string filename)
 	}
 	return 1;
 }
+}
 
 int LuaClass::shell_sleep(lua_State *pState)
 {
@@ -80,7 +83,6 @@ int LuaClass::shell_sleep(lua_State *pState)
 	seconds=lua_tointeger(pState,1);
 	Sleep(seconds);
 	return 0;
-
 }
 
 int LuaClass::shell_connect(lua_State *pState)
